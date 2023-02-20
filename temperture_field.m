@@ -49,6 +49,7 @@ rhocdt(:,N_x-8:N_x-5)=rhoc_steel/dt;
 rhocdt(N_y-9:N_y,:)=rhoc_steel/dt;
 q(9:N_y,N_x-6)=1000000000/dt;
 q(9:N_y,N_x-7)=250000000/dt;
+
 %air
 % material(1:9,:)=0.001;
 % material(:,N_x-5:N_x)=0.001;
@@ -61,9 +62,9 @@ rhocdt(:,N_x-5:N_x)=rhoc_air/dt;
 
 t=temp_neo(:);
 
- heatmap(lambda,'ColorbarVisible','off','GridVisible','off','Colormap',turbo);
+% heatmap(lambda,'ColorbarVisible','off','GridVisible','off','Colormap',turbo);
 % 
- heatmap(temp_neo,'ColorbarVisible','off','GridVisible','off','Colormap',turbo);
+ %heatmap(temp_neo,'ColorbarVisible','off','GridVisible','off','Colormap',turbo);
 % fo=1;
 
 
@@ -129,9 +130,8 @@ for time=1:100
     ddtemp=dtemp_neo-dtemp;
     dtemp=dtemp_neo;
     itemp=itemp+dtemp;
+    %flag=-0.001*dtemp-0.01*dtemp-0.0002*itemp;
     flag=0;
-    %-0.001*dtemp-0.01*dtemp-0.0002*itemp;
-
     if flag>2
         flag=2;
     end
@@ -140,7 +140,7 @@ for time=1:100
     end
 
     %showcase
-    h= heatmap(temp_neo,'Colormap',turbo,'ColorLimits',[400 700]);
+    h= heatmap(temp_neo,'Colormap',turbo,'ColorLimits',[000 700]);
 %     E(1,time)=t_neo'*rhocdt(:)*dt/10^11;
    E(1,time)= temp_neo(26,6);
    F(1,time)= flag;
@@ -149,6 +149,6 @@ for time=1:100
 
     A=zeros(N_x*N_y,N_x*N_y);
 end
-plot(1:100,E);
-hold on;
-plot(1:100,F*500);
+%plot(1:100,E);
+%hold on;
+%plot(1:100,F*500);
