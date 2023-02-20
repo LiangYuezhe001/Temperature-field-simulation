@@ -129,7 +129,8 @@ for time=1:100
     ddtemp=dtemp_neo-dtemp;
     dtemp=dtemp_neo;
     itemp=itemp+dtemp;
-    flag=-0.001*dtemp-0.01*dtemp-0.0002*itemp;
+    flag=0;
+    %-0.001*dtemp-0.01*dtemp-0.0002*itemp;
 
     if flag>2
         flag=2;
