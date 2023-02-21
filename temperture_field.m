@@ -11,6 +11,9 @@ aluminium.lambda=200;steel.lambda=50;air.lambda=3;
 aluminium.rhoc=2790*881;steel.rhoc=7840*465;air.rhoc=1.2;
 aluminium.inital_temp=654;steel.inital_temp=20;air.inital_temp=20;
 bias=00;
+x1=zeros(1,100);
+x2=zeros(1,100);
+y=zeros(1,100);
 %mesh
 N_x=25;
 N_y=50;
@@ -96,7 +99,7 @@ for time=1:100
                 lambda_e=min(lambda(y,x),lambda(y,x+1));
                 t_para(y,x+1)=lambda_e/dxx;
             else
-                                 lambda_e=1;
+                lambda_e=1;
                 %                 t_para(y,x)=t_para(y,x)+lambda_e/dxx;
             end
 
@@ -113,12 +116,12 @@ for time=1:100
     end
 
     t_neo=A\b;
-  %  t_neo=temp_caculation(N_x,N_y,lambda,rhocdt,temp_neo,dyy,dxx);
+    %  t_neo=temp_caculation(N_x,N_y,lambda,rhocdt,temp_neo,dyy,dxx);
     temp_neo=reshape(t_neo,N_y,N_x);
-    
+
     %showcase
     h= heatmap(temp_neo,'Colormap',turbo,'ColorLimits',[000 700]);
-   % pause(0.1)
+    % pause(0.1)
     A=zeros(N_x*N_y,N_x*N_y);
     input(1,bias+time)=temp_neo(42,19);
     input(2,bias+time)=temp_neo(30,19);
@@ -130,4 +133,9 @@ for time=1:100
     output(3,bias+time)=temp_neo(17,1);
 
 end
-
+x1=output(1,:);
+for time =1:100
+    in=input(:,time);
+    x2(1,time)=sim(results,in);
+    y(1,time)=time;
+end
