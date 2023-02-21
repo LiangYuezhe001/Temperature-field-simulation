@@ -9,7 +9,7 @@ output = zeros(3,100);
 lambda_w=0;lambda_e=0;lambda_s=0;lambda_n=0;
 aluminium.lambda=200;steel.lambda=50;air.lambda=3;
 aluminium.rhoc=2790*881;steel.rhoc=7840*465;air.rhoc=1.2;
-aluminium.inital_temp=654;steel.inital_temp=20;air.inital_temp=20;
+aluminium.inital_temp=400;steel.inital_temp=20;air.inital_temp=20;
 bias=00;
 x1=zeros(1,100);
 x2=zeros(1,100);
@@ -120,7 +120,7 @@ for time=1:100
     temp_neo=reshape(t_neo,N_y,N_x);
 
     %showcase
-    h= heatmap(temp_neo,'Colormap',turbo,'ColorLimits',[000 700]);
+   % h= heatmap(temp_neo,'Colormap',turbo,'ColorLimits',[000 700]);
     % pause(0.1)
     A=zeros(N_x*N_y,N_x*N_y);
     input(1,bias+time)=temp_neo(42,19);
@@ -133,9 +133,9 @@ for time=1:100
     output(3,bias+time)=temp_neo(17,1);
 
 end
-x1=output(1,:);
-for time =1:100
-    in=input(:,time);
-    x2(1,time)=sim(results,in);
-    y(1,time)=time;
-end
+% x1=output(1,:);
+% for time =1:100
+%     in=input(:,time);
+%     x2(1,time)=sim(results,in);
+%     y(1,time)=time;
+% end
