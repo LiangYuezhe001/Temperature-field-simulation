@@ -4,13 +4,13 @@ air = material;
 %basci para
 dx=0.0025;dy=0.00125;dt=1;
 dxx=dx*dx;dyy=dy*dy;
-input = zeros(5,300) ;
-output = zeros(3,300);
-%lambda_w=0;lambda_e=0;lambda_s=0;lambda_n=0;
+input = zeros(5,100) ;
+output = zeros(3,100);
+lambda_w=0;lambda_e=0;lambda_s=0;lambda_n=0;
 aluminium.lambda=200;steel.lambda=50;air.lambda=3;
 aluminium.rhoc=2790*881;steel.rhoc=7840*465;air.rhoc=1.2;
-aluminium.inital_temp=600;steel.inital_temp=20;air.inital_temp=20;
-bias=0;
+aluminium.inital_temp=654;steel.inital_temp=20;air.inital_temp=20;
+bias=00;
 %mesh
 N_x=25;
 N_y=50;
@@ -58,7 +58,7 @@ rhocdt(:,N_x-5:N_x)=air.rhoc/dt;
 
 t=temp_neo(:);
 
-for time=1:10
+for time=1:100
 
     for y=1:1:N_y
         for x=1:1:N_x
@@ -118,13 +118,16 @@ for time=1:10
     
     %showcase
     h= heatmap(temp_neo,'Colormap',turbo,'ColorLimits',[000 700]);
-    pause(0.1)
+   % pause(0.1)
     A=zeros(N_x*N_y,N_x*N_y);
-    input(1,time)=temp_neo(19,42);
-    input(2,time)=temp_neo(19,30);
-    input(3,time)=temp_neo(19,17);
-    input(4,time)=time;
-    input(4,time)=aluminium.inital_temp;
+    input(1,bias+time)=temp_neo(42,19);
+    input(2,bias+time)=temp_neo(30,19);
+    input(3,bias+time)=temp_neo(17,19);
+    input(4,bias+time)=time;
+    input(5,bias+time)=aluminium.inital_temp;
+    output(1,bias+time)=temp_neo(42,1);
+    output(2,bias+time)=temp_neo(30,1);
+    output(3,bias+time)=temp_neo(17,1);
 
 end
 
